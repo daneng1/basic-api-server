@@ -11,10 +11,11 @@ describe('***API SERVER***', () => {
     });
   });
 
-  // it('should respond with a 500 on an error', async () => {
-  //   const response = await mockRequest.get('/foods');
-  //   expect(response.status).toBe(500);
-  // });
+  it('should respond with a 404 on bad method', async () => {
+    return mockRequest.patch('/food').then(data => {
+      expect(data.status).toBe(404);
+    });
+  });
 
   it('should create a new item in the db', async () => {
     const response = await mockRequest.post('/food').send({ name: 'banana' })
@@ -25,8 +26,6 @@ describe('***API SERVER***', () => {
   it('should retrieve an item from the db', async () => {
     const response = await mockRequest.get('/food/1');
     expect(response.status).toBe(200);
-
-    console.log(response.body);
   });
 
   it('should retrieve all items from the db', async () => {
@@ -34,14 +33,11 @@ describe('***API SERVER***', () => {
     expect(response.status).toBe(200);
   });
 
-  // it('should delete one item from the DB', async () => {
-  //   const id = record.id;
-  //   const response = await mockRequest.delete(`/food/${id}`);
-  //   expect(response.status).toBe(200);
-
-  //   const getResponse = await mockRequest.get(`/food/${id}`);
-  //   expect(getResponse.body.id).toBeUndefined();
-  // });
+  it('should delete one item from the DB', async () => {
+    const response = await mockRequest.delete('/food/1');
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({});
+  });
 
   it('should create a new item in the db', async () => {
     const response = await mockRequest.post('/clothes').send({ name: 'shirt' })
@@ -51,7 +47,7 @@ describe('***API SERVER***', () => {
 
   it('should retrieve an item from the db', async () => {
     const response = await mockRequest.get('/clothes/1');
-    expect(response.status).toBe(200);
+    expect(response.status).toEqual(200);
 
     console.log(response.body);
   });
@@ -61,12 +57,10 @@ describe('***API SERVER***', () => {
     expect(response.status).toBe(200);
   });
 
-  // it('should delete one item from the DB', async () => {
-  //   const id = .id;
-  //   const response = await mockRequest.delete(`/clothes/${id}`);
-  //   expect(response.status).toBe(200);
+  it('should delete one item from the DB', async () => {
 
-  //   const getResponse = await mockRequest.get(`/clothes/${id}`);
-  //   expect(getResponse.body.id).toBeUndefined();
-  // });
+    const response = await mockRequest.delete('/clothes/1');
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({});
+  });
 });

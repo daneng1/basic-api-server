@@ -40,7 +40,7 @@ function updateFood(req, res) {
 function deleteFood (req, res) {
   const id = parseInt(req.params.id);
   let deletedFood = foods.delete(id);
-  res.status(200).json({msg: `${deletedFood} was deleted`});
+  res.status(200).json({deletedFood});
 }
 
 module.exports = router;

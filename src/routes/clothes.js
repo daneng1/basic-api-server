@@ -40,7 +40,7 @@ function updateClothes(req, res) {
 function deleteClothes (req, res) {
   const id = parseInt(req.params.id);
   let deletedClothes = clothes.delete(id);
-  res.status(200).json({msg: `${deletedClothes} was deleted`});
+  res.status(200).json({deletedClothes});
 }
 
 module.exports = router;
